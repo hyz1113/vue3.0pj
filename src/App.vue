@@ -9,13 +9,13 @@
         :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1">
-          nav 1
+          <router-link to="/">首页</router-link>
         </a-menu-item>
         <a-menu-item key="2">
-          nav 2
+          <router-link to="/about">基础组件</router-link>
         </a-menu-item>
         <a-menu-item key="3">
-          nav 3
+          <router-link to="/about">常用插件</router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-header>
@@ -57,15 +57,10 @@
         </a-menu>
       </a-layout-sider>
       <a-layout style="padding: 0 24px 24px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item>List</a-breadcrumb-item>
-          <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
         <a-layout-content
           :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          Content
+          <router-view></router-view>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -73,8 +68,18 @@
 </template>
 <script>
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
-
+import {reactive, toRefs} from 'vue'
 export default {
+  setup(props, context){ // 入口
+     console.log(props)
+     console.log(context)
+     const state = reactive({
+       selectedKeys: ['1', '2']
+     })
+     return {
+       ...toRefs(state)
+     }
+  },
   components: {
     UserOutlined,
     LaptopOutlined,
